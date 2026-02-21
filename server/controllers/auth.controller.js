@@ -34,9 +34,22 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
 
+    // Generate JWT
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
     res.status(201).json({
       message: "User created successfully",
-      userId: user._id,
+      token,
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        profilePic: user.profilePic,
+      },
     });
   } catch (error) {
     res.status(500).json({
@@ -86,7 +99,12 @@ export const login = async (req, res) => {
     res.status(200).json({
       message: "Login successful",
       token,
-      userId: user._id,
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        profilePic: user.profilePic,
+      },
     });
   } catch (error) {
     res.status(500).json({

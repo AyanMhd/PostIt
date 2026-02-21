@@ -7,7 +7,7 @@ import {
   deleteBlog,
 } from "../controllers/blog.controller.js";
 
-import authMiddleware from "../middleware/auth.middlewares.js";
+import authMiddleware from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 

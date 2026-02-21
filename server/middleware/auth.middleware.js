@@ -17,6 +17,8 @@ const authMiddleware = (req,res,next) => {
     catch(error){ 
         return res.status(401).json({
             message : "Not authorized",
+            error,
         });
     }
 };
+export default authMiddleware;
